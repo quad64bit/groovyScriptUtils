@@ -42,7 +42,16 @@ plugins {
 }
 
 apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'maven-publish'
+
+repositories{
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.2.1'
+}
 
 publishing {
     publications {
