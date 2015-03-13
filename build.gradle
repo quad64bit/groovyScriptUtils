@@ -30,3 +30,46 @@ dependencies {
     testCompile "junit:junit:4.11"
 }
 */
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id 'com.jfrog.artifactory' version '3.0.1'
+}
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId 'org.gates'
+            artifactId 'groovy-script-utils'
+            version '0.1.0'
+            
+            from components.java
+            artifact(file("$rootDir/build/libs/groovyScriptUtils.jar")) // deploy arbitrary file
+        }
+    }
+}
+
+artifactory {
+    contextUrl = ctacArtifactoryServerUrl
+    publish {
+        repository {
+            repoKey = ctacArtifactoryRepoKey
+            username = ctacArtifactoryUsername
+            password = ctacArtifactoryPassword
+        }
+        defaults {
+            //publishIvy & publishPom are true by default
+            publishArtifacts = true
+            publications('mavenJava')
+            properties = ['qa.level': 'basic']
+        }
+    }
+}
