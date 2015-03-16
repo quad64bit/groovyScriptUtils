@@ -1,6 +1,8 @@
 package org.gates.groovy.scriptutils
 
 class TerminalPrintingTools{	
+	//TODO expand this with http://pueblo.sourceforge.net/doc/manual/ansi_color_codes.html
+
 	static PINK      		= '\033[95m'
 	static LIGHT_BLUE      	= '\033[94m'
 	static BLUE        		= '\033[34m'
